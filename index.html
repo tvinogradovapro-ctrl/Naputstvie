@@ -3,253 +3,1150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Напутствие_NEW — генератор поддержки</title>
+    <title>Тест: ваш идеальный интерьерный стиль</title>
     <style>
-        :root {
-            --pantone-715c: #f58a1f;
-            --pantone-437c: #2b2a28;
-            --pantone-2577c: #7b3fa0;
-            --pantone-340c: #1b5e4a;
-            --pantone-blackc: #000000;
-            --pantone-cool-grey-1c: #e6e7e8;
-            --font: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            --bg: #1f2937;
-            --card-bg: #2b2f3a;
-            --panel: #343a47;
-            --panel-hover: #3e4452;
-            --text: #f3f4f6;
-            --muted: #9ca3af;
-            --border: #4b5563;
-            --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            --radius: 20px;
-            --radius-sm: 12px;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
         }
 
         body {
-            background: var(--bg);
-            font-family: var(--font);
-            color: var(--text);
-            line-height: 1.7;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
+            background: linear-gradient(145deg, #f8f4ed 0%, #efe6db 100%);
             min-height: 100vh;
-        }
-
-        .farewell-section {
-            max-width: 700px;
-            width: 100%;
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 48px 56px 40px;
-            position: relative;
-            overflow: hidden;
-            align-self: center;
-        }
-
-        .farewell-section::before {
-            content: "";
-            position: absolute;
-            top: -100px;
-            right: -100px;
-            width: 260px;
-            height: 260px;
-            background: radial-gradient(circle, rgba(245, 138, 31, 0.2), transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        h2 {
-            font-size: 26px;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: -0.02em;
-            margin-bottom: 16px;
-            position: relative;
-        }
-
-        .farewell-text {
-            font-size: 17px;
-            color: #e5e7eb;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .farewell-text strong {
-            color: #ffffff;
-        }
-
-        .contact-block {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 20px 24px;
-            margin: 20px 0;
-            position: relative;
-        }
-
-        .contact-block p {
-            margin-bottom: 6px;
-            color: #e5e7eb;
-        }
-
-        .contact-block strong {
-            color: #ffffff;
-        }
-
-        .generator-box {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 24px 28px;
-            margin-top: 28px;
-            position: relative;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .generator-box:hover {
-            border-color: var(--pantone-715c);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-        }
-
-        .generator-box h3 {
-            font-size: 19px;
-            font-weight: 650;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
-
-        .generator-box p {
-            color: var(--muted);
-            margin-bottom: 18px;
-            font-size: 15px;
-        }
-
-        .message-display {
-            background: rgba(27, 94, 74, 0.15);
-            border: 1px solid rgba(27, 94, 74, 0.4);
-            border-radius: 10px;
-            padding: 18px 22px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            font-weight: 500;
-            color: #c3e6d0;
-            min-height: 60px;
             display: flex;
             align-items: center;
-            transition: all 0.3s ease;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-illustration {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.55;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 0 2vw;
+        }
+
+        .bg-illustration svg {
+            width: clamp(160px, 24vw, 320px);
+            height: auto;
+            display: block;
+        }
+
+        .quiz-container {
+            position: relative;
+            z-index: 1;
+            max-width: 860px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 48px;
+            padding: 36px 40px 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            transition: all 0.2s ease;
+        }
+
+        .quiz-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .progress-indicator {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .progress-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #6b5b4e;
+            background: #e9dfd3;
+            padding: 6px 16px;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+        }
+
+        .decor-emojis {
+            display: flex;
+            gap: 10px;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2e221b;
+            margin-bottom: 28px;
+            padding-bottom: 6px;
+            border-bottom: 3px dashed #d9c8b8;
+            display: inline-block;
+            line-height: 1.3;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .option-btn {
+            background: #ffffffd9;
+            border: 1.5px solid #e3d6c9;
+            border-radius: 32px;
+            padding: 18px 26px;
+            text-align: left;
+            font-size: 1.08rem;
+            line-height: 1.5;
+            color: #2d241e;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.08);
+            display: block;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            backdrop-filter: blur(4px);
+        }
+
+        .option-btn:hover {
+            background: #fcf7f0;
+            border-color: #b8a290;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 22px -10px rgba(80, 60, 40, 0.2);
+        }
+
+        .option-btn.selected {
+            background: #e6d8c9;
+            border-color: #937b64;
+            box-shadow: 0 0 0 3px rgba(147, 123, 100, 0.25);
+            color: #1f1712;
+            font-weight: 400;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 8px;
         }
 
         .btn {
-            display: inline-block;
-            background: var(--pantone-715c);
-            color: #ffffff;
             border: none;
-            border-radius: 8px;
-            padding: 14px 32px;
-            font-size: 16px;
+            background: #cdbaa8;
+            color: #2a1f18;
+            padding: 16px 34px;
+            border-radius: 60px;
             font-weight: 600;
-            font-family: var(--font);
+            font-size: 1.1rem;
+            letter-spacing: 0.4px;
             cursor: pointer;
-            transition: background 0.2s ease, transform 0.1s ease;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 18px -10px rgba(70, 50, 30, 0.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1px solid #ffffff50;
+            backdrop-filter: blur(4px);
+            flex: 0 0 auto;
+            text-decoration: none;
         }
 
-        .btn:hover {
-            background: #d97706;
-            transform: translateY(-1px);
+        .btn-primary {
+            background: #9b8876;
+            color: #ffffff;
+            box-shadow: 0 12px 22px -10px #5f4a38;
         }
 
-        .btn:active {
-            transform: translateY(0);
+        .btn-primary:hover {
+            background: #7f6b58;
+            transform: scale(1.01);
         }
 
-        .counter {
-            margin-top: 14px;
-            font-size: 14px;
-            color: var(--muted);
+        .btn-secondary {
+            background: #ece2d7;
+            color: #3d2f25;
         }
 
-        @media (max-width: 640px) {
-            .farewell-section {
-                padding: 32px 24px;
+        .btn-secondary:hover {
+            background: #dfd1c2;
+        }
+
+        .btn-accent {
+            background: #3f2e22;
+            color: #f9efe5;
+            box-shadow: 0 12px 22px -10px #2a1d14;
+        }
+
+        .btn-accent:hover {
+            background: #2a1d14;
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            filter: grayscale(0.6);
+            transform: none;
+        }
+
+        .result-screen {
+            text-align: left;
+        }
+
+        .result-style-badge {
+            display: inline-block;
+            background: #3f2e22;
+            color: #f9efe5;
+            font-weight: 500;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            box-shadow: 0 12px 18px -10px #3f2e22;
+        }
+
+        .result-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2f2018;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .result-description {
+            font-size: 1.14rem;
+            line-height: 1.7;
+            color: #3e2f26;
+            background: #f3ebe3e0;
+            padding: 28px 32px;
+            border-radius: 36px;
+            border: 1px solid #ffffffee;
+            box-shadow: 0 12px 24px -16px #00000020;
+            margin-bottom: 36px;
+            backdrop-filter: blur(4px);
+        }
+
+        .color-choice {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 26px 0 28px;
+            flex-wrap: wrap;
+        }
+
+        .color-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 16px;
+            border-radius: 32px;
+            background: #ffffffb0;
+            border: 2px solid transparent;
+            box-shadow: 0 8px 16px -10px #00000020;
+            backdrop-filter: blur(4px);
+            width: 220px;
+            position: relative;
+        }
+
+        .color-card:hover {
+            border-color: #9b8876;
+            transform: translateY(-3px);
+        }
+
+        .color-card.active {
+            border-color: #5f4a38;
+            background: #f5ede5;
+            box-shadow: 0 0 0 3px #baa898;
+        }
+
+        .color-photo {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 8px 14px -8px #00000030;
+            border: 2px solid #ffffffcc;
+            display: block;
+            background-color: #e9dfd3;
+        }
+
+        .color-photo.lighten, .result-image-container img.lighten {
+            filter: brightness(1.4);
+        }
+
+        .color-label {
+            font-weight: 500;
+            color: #2f231c;
+            background: #e9dfd3c0;
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .zoom-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: background 0.2s, transform 0.2s;
+            z-index: 2;
+        }
+
+        .zoom-icon:hover {
+            background: #fff;
+            transform: scale(1.1);
+        }
+
+        .zoom-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: #3f2e22;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .result-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .result-image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .result-image-container img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.25);
+            background-color: #e9dfd3;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #fdfaf7;
+            border-radius: 32px;
+            padding: 32px;
+            max-width: 480px;
+            width: 100%;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        /* Обновленная кнопка закрытия (крестик) */
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #ece2d7;
+            border: none;
+            font-size: 2.2rem; /* Увеличенный размер крестика */
+            cursor: pointer;
+            color: #5a4a3a;
+            line-height: 1;
+            width: 44px; /* Немного больше для баланса */
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0 4px 0; /* Центровка */
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: #dfd1c2;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.25);
+            display: block;
+            background-color: #e9dfd3;
+        }
+
+        .zoom-modal .modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            padding: 20px;
+            background: transparent;
+            box-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zoom-modal .modal-image {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
+            transform: scale(1.0);
+            width: auto;
+            height: auto;
+        }
+
+        .modal-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #3e2f26;
+            text-align: center;
+        }
+
+        .modal-link {
+            color: #7f6b58;
+            font-weight: 500;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            word-break: break-all;
+        }
+
+        .share-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .share-btn-main {
+            background: #3f2e22;
+            color: #f9efe5;
+            border: none;
+            padding: 16px 34px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 12px 22px -10px #2a1d14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .share-btn-main:hover {
+            background: #2a1d14;
+        }
+
+        .start-screen {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .start-screen h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2f2018;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .start-screen p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #3e2f26;
+            margin-bottom: 36px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .start-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 8px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .fade-in {
+            animation: fade 0.35s ease;
+        }
+
+        @keyframes fade {
+            from { opacity: 0.2; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .quiz-container {
+                padding: 24px 22px 28px;
+                border-radius: 32px;
             }
-            h2 {
-                font-size: 22px;
+            .question-text {
+                font-size: 1.25rem;
+            }
+            .option-btn {
+                padding: 16px 20px;
+                font-size: 0.98rem;
+            }
+            .btn {
+                padding: 14px 24px;
+                font-size: 1rem;
+            }
+            .result-title {
+                font-size: 2rem;
+            }
+            .result-description {
+                padding: 20px;
+            }
+            .bg-illustration {
+                opacity: 0.25;
+            }
+            .color-card {
+                width: 100%;
+            }
+            .modal-content {
+                padding: 24px 20px;
+            }
+            .start-screen h2 {
+                font-size: 1.7rem;
+            }
+            .start-screen p {
+                font-size: 1rem;
+            }
+            .zoom-modal .modal-content {
+                padding: 10px;
+            }
+            .zoom-modal .modal-image {
+                max-height: 80vh;
+            }
+            .modal-close {
+                width: 38px;
+                height: 38px;
+                font-size: 1.8rem;
+                padding-bottom: 3px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .nav-buttons {
+                flex-direction: column-reverse;
+            }
+            .btn {
+                width: 100%;
+            }
+            .quiz-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .action-buttons .btn {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="farewell-section">
-        <h2>12. Напутствие_NEW</h2>
 
-        <div class="farewell-text">
-            <p><strong>Спасибо за внимание!</strong></p>
-            <p>Теперь ты знаешь, как устроен план развития и как по нему двигаться. Впереди много интересного, и мы уверены, что у тебя получится.</p>
-        </div>
+<div class="bg-illustration">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="armchairGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#cbb8a5"/>
+                <stop offset="100%" stop-color="#a88f78"/>
+            </linearGradient>
+            <linearGradient id="lampGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f4e9d8"/>
+                <stop offset="100%" stop-color="#d9c3a5"/>
+            </linearGradient>
+        </defs>
+        <rect x="0" y="160" width="200" height="40" fill="#e2d4c4"/>
+        <rect x="55" y="95" width="80" height="65" rx="16" fill="url(#armchairGrad)"/>
+        <rect x="45" y="105" width="22" height="55" rx="12" fill="#b39a83"/>
+        <rect x="123" y="105" width="22" height="55" rx="12" fill="#b39a83"/>
+        <rect x="60" y="80" width="70" height="30" rx="14" fill="#d8c6b2"/>
+        <rect x="62" y="150" width="10" height="15" fill="#8f7862"/>
+        <rect x="118" y="150" width="10" height="15" fill="#8f7862"/>
+        <rect x="160" y="100" width="4" height="65" fill="#8f7862"/>
+        <path d="M145 100 L175 100 L170 75 L150 75 Z" fill="url(#lampGrad)"/>
+        <ellipse cx="160" cy="100" rx="18" ry="5" fill="#e6d8c5" opacity="0.7"/>
+        <ellipse cx="95" cy="165" rx="55" ry="12" fill="#d6c4b0" opacity="0.7"/>
+    </svg>
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="shelfGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#c2ab93"/>
+                <stop offset="100%" stop-color="#a68e76"/>
+            </linearGradient>
+        </defs>
+        <rect x="0" y="160" width="200" height="40" fill="#e2d4c4"/>
+        <rect x="40" y="50" width="120" height="110" rx="8" fill="url(#shelfGrad)"/>
+        <rect x="52" y="62" width="96" height="4" fill="#8f7862"/>
+        <rect x="52" y="102" width="96" height="4" fill="#8f7862"/>
+        <rect x="52" y="142" width="96" height="4" fill="#8f7862"/>
+        <path d="M70 142 Q66 120 74 108 L86 108 Q94 120 90 142 Z" fill="#d9c3a5"/>
+        <ellipse cx="80" cy="108" rx="6" ry="2.5" fill="#b39a83"/>
+        <rect x="98" y="128" width="12" height="14" fill="#b8a08a"/>
+        <rect x="112" y="124" width="10" height="18" fill="#9c8570"/>
+        <rect x="124" y="130" width="14" height="12" fill="#c9b49e"/>
+        <rect x="112" y="66" width="30" height="28" rx="3" fill="#e9ddcd" stroke="#8f7862" stroke-width="2"/>
+        <circle cx="127" cy="80" r="7" fill="#b8a08a"/>
+        <rect x="60" y="104" width="16" height="10" rx="2" fill="#a68e76"/>
+        <path d="M68 104 Q60 88 68 82 Q76 88 68 104" fill="#9aa88a"/>
+    </svg>
+</div>
 
-        <div class="contact-block">
-            <p>Если остались вопросы, напиши менеджеру по карьерному развитию.</p>
-            <p><strong>Контакт: [место для данных — внести в iSpring]</strong></p>
-        </div>
+<div class="quiz-container" id="quizContainer"></div>
 
-        <div class="generator-box">
-            <h3>✨ Персональное напутствие</h3>
-            <p>Нажми на кнопку, чтобы получить дополнительную порцию поддержки.</p>
-
-            <div class="message-display" id="message-display">
-                Ты уже сделал важный шаг — начни с мысли, которая откликается.
-            </div>
-
-            <button class="btn" id="generate-btn">Сгенерировать напутствие</button>
-            <div class="counter" id="counter">Твоё напутствие ещё не выбрано</div>
-        </div>
+<!-- Модальное окно для увеличения картинки -->
+<div class="modal-overlay zoom-modal" id="zoomModal">
+    <div class="modal-content">
+        <button class="modal-close" id="closeZoomBtn">&times;</button>
+        <img class="modal-image" id="zoomImage" src="" alt="Увеличенная картинка">
     </div>
+</div>
 
-    <script>
-        (function() {
-            const messages = [
-                "Помни: ты уже в резерве, а это значит, что в тебя верят. Осталось только подтвердить это действиями.",
-                "Не сравнивай свой темп с другими. У каждого свой путь, и твой — точно не хуже.",
-                "Ошибки на пути — это не сбой, а часть обучения. Важно не остановиться.",
-                "Ты не один. Если сложно, всегда можно написать менеджеру или куратору — они на твоей стороне.",
-                "Маленький шаг каждый день лучше большого рывка раз в месяц. Продолжай двигаться.",
-                "Развитие — это не про скорость, а про устойчивость. Ты справишься.",
-                "Если кажется, что впереди слишком много работы, посмотри, как много ты уже сделал. Это впечатляет.",
-                "Твоя будущая должность — это не награда, а следующий этап твоего роста. И ты к нему готов.",
-                "Планы нужны, чтобы их корректировать. Если что-то идёт не так, просто вернись к курсу и продолжай.",
-                "Сегодня ты резервист, завтра — выпускник. Всё в твоих руках.",
-                "Не забывай отдыхать. Устойчивый рост важнее быстрого выгорания.",
-                "Ты стал сильнее, просто пройдя этот курс. Остальное — дело техники.",
-                "Успех — это не прямая линия. Иногда нужно сделать паузу, чтобы потом ускориться.",
-                "Каждое выполненное задание — это кирпичик в фундамент твоей новой роли. Ты строишь надёжно.",
-                "Доверяй себе. Если ты решил участвовать в резерве, значит, у тебя есть для этого основания.",
-                "Твой опыт и знания уже ценны. Этот план помогает им проявиться.",
-                "Не бойся задавать вопросы. Вопросы — признак зрелости, а не слабости.",
-                "Сегодня ты учишься, завтра будешь учить других. Это крутой путь.",
-                "Даже если получится не с первого раза, это не отменяет твоего прогресса.",
-                "Ты на верном пути. Просто продолжай идти."
-            ];
+<script>
+    (function() {
+        // ---------- ДАННЫЕ ТЕСТА ----------
+        const questions = [
+            {
+                text: "Как проходит ваше любимое утро выходного дня?",
+                options: [
+                    { text: "Схватил кофе из кофемашины, взглянул, что нового в заметках на телефоне, включил фоновую музыку — и поехали! Всё быстро и ничего лишнего.", style: "C" },
+                    { text: "Медленно, со вкусом: неспешный завтрак за большим столом, запах свежей выпечки, чай или кофе в уютной глиняной кружке, как на даче.", style: "T" },
+                    { text: "Красиво накрыт стол, в руках тонкая фарфоровая чашка, хрустящий круассан — вокруг тишина, можно никуда не бежать и просто наслаждаться моментом.", style: "N" }
+                ]
+            },
+            {
+                text: "Что чаще всего звучит в ваших наушниках или дома фоном?",
+                options: [
+                    { text: "Что-то из инди, электронные треки или минималистичный лоу-фай — чтобы настраивать на рабочий лад.", style: "C" },
+                    { text: "Акустика, немного фолка, что-то уютное и ламповое, может, любимый альбом на виниле.", style: "T" },
+                    { text: "Джаз, неоклассика или красивые вокальные партии с богатыми аранжировками — музыка для расслабленного вечера.", style: "N" }
+                ]
+            },
+            {
+                text: "Какая книга будет ждать вас к вечеру рядом с кроватью?",
+                options: [
+                    { text: "Новенькая книга по саморазвитию, что-нибудь о городах будущего или биографии крутых предпринимателей.", style: "C" },
+                    { text: "Тёплая проза, добрые семейные истории, сборник уютных рецептов или книги про сад и рукоделие.", style: "T" },
+                    { text: "Роман о прошлом, психологическая драма или шикарный альбом по искусству.", style: "N" }
+                ]
+            },
+            {
+                text: "Какая картина заставит вас задержаться у неё в галерее?",
+                options: [
+                    { text: "Абстракция, современный постер, четкие графичные линии.", style: "C" },
+                    { text: "Лес, поля, тёплый деревенский сюжет — родное и естественное, будто с картинки из детства.", style: "T" },
+                    { text: "Портреты в духе классики, светотень, богатая композиция и детали, от которых сложно оторваться.", style: "N" }
+                ]
+            },
+            {
+                text: "К какому пледу или обивке на диване хочется прикоснуться?",
+                options: [
+                    { text: "Ровная, практичная ткань, гладкий трикотаж, минимализм во всём.", style: "C" },
+                    { text: "Плетёная фактура, твид, клетка — что-то тёплое, уютное, как у бабушки.", style: "T" },
+                    { text: "Велюр, бархат, ткань с красивым отливом, объёмные текстуры — всё выглядит дорого и стильно.", style: "N" }
+                ]
+            },
+            {
+                text: "Какой предмет обязательно должен быть дома, иначе «неуютно»?",
+                options: [
+                    { text: "Умные гаджеты, аккуратные горшки с растениями, регулировка света под настроение.", style: "C" },
+                    { text: "Вещи с «ремесленной душой»: плетёные корзины, керамика ручной работы, подушки с цветами.", style: "T" },
+                    { text: "Стильные зеркала, чуть-чуть золота или серебра, симметрия во всём.", style: "N" }
+                ]
+            },
+            {
+                text: "Что самое главное для вас в интерьере?",
+                options: [
+                    { text: "Удобство и простота, минимум лишнего, всё по делу и на своих местах.", style: "C" },
+                    { text: "Основательность, тепло, простота — чтобы было место для отдыха и встреч с близкими.", style: "T" },
+                    { text: "Элегантность, плавные линии, гармония и классика в современном прочтении.", style: "N" }
+                ]
+            },
+            {
+                text: "Как вы предпочитаете проводить свободное время?",
+                options: [
+                    { text: "Исследую города, ищу новинки в музеях, зависаю в стильных кофейнях.", style: "C" },
+                    { text: "Еду на дачу, гуляю в лесу или просто отдыхаю на природе.", style: "T" },
+                    { text: "Хожу в театр, на выставки, устраиваю ужины в красивых ресторанах и кафе.", style: "N" }
+                ]
+            }
+        ];
 
-            const messageDisplay = document.getElementById('message-display');
-            const generateBtn = document.getElementById('generate-btn');
-            const counter = document.getElementById('counter');
-            let count = 0;
+        // ---------- ССЫЛКИ НА ИЗОБРАЖЕНИЯ ----------
+        const photos = {
+            // Современный (C)
+            C_lightBright: "https://2.downloader.disk.yandex.ru/preview/47358ece7e09bbe6a3e2c92892ee5f27f8967a697ad2390bfb0c5627594cc1b2/inf/ju6tZVS2dE9jMoWtd5PPipXe03w_7TuNS8S3l_V_4oCmV-kcU1T_EaE5m2ULH0cqvw6wqS10XpX3NGdOkL7X3w%3D%3D?uid=1285640022&filename=%D0%A1%D0%9A%D0%90%D0%9D.jpeg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1285640022&tknv=v3&is_direct_zip_experiment=1&size=1920x922",
+            C_light: "https://1.downloader.disk.yandex.ru/preview/eeeb2b3abd447c5056b97b2fc6a831f6c000dabcc7c3432d64085046d951ce9d/inf/-f-11KoECuc7WdC9dIHSoJXe03w_7TuNS8S3l_V_4oCWRKMGNSQjTURosyanzd9WxTMLGQbpb0sjmN8dfRdhQg%3D%3D?uid=1285640022&filename=%D0%A1%D0%A1%D0%A1.jpeg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1285640022&tknv=v3&is_direct_zip_experiment=1&size=1920x922",
+            C_dark: "https://3.downloader.disk.yandex.ru/preview/2ff3e994c9b26868631549bc4754ee87b0685c534ef80c7519e5a4c46a8c236d/inf/mxFwj8mNzY0bviVRf-Kb-ZXe03w_7TuNS8S3l_V_4oDu4Aoo8RAVKvEpqhvxB0NHAcdS9rZ8OLvp0uhwOeqs4g%3D%3D?uid=1285640022&filename=%D0%A1%D0%A1%D0%A2.jpeg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1285640022&tknv=v3&is_direct_zip_experiment=1&size=1920x922",
+            
+            // Традиционный (T)
+            T_light: "https://4.downloader.disk.yandex.ru/preview/4773a38b9a1ca46ad02365d88b83ba8c3b9fceed47baaaaed9e2c6794d963e32/inf/K7m7sLpFFFVADeYWaZm5vpXe03w_7TuNS8S3l_V_4oAGQRKIdo0lmGWNvCsf5Z306yoYq9pnaSQYEfsan2l0Jw%3D%3D?uid=1285640022&filename=%D0%A2%D0%A1.jpeg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1285640022&tknv=v3&is_direct_zip_experiment=1&size=1920x922",
+            T_dark: "https://1.downloader.disk.yandex.ru/preview/ca4531cd4275d0ebca592e6c3d3f9238cc5c2a2c7d625ba5a3f3d0caad494357/inf/XvTBSYPFW_dQ0ZZ_sZnp3ZXe03w_7TuNS8S3l_V_4oBCM_k2c0umYsgNUDjvgxUuhtrS388Eh-TNhO1BPvpBRg%3D%3D?uid=1285640022&filename=%D0%A2%D0%A2%201.jpeg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1285640022&tknv=v3&is_direct_zip_experiment=1&size=1920x922",
+            
+            // Неоклассика (N)
+            N_light: "https://2.downloader.disk.yandex.ru/preview/4d98916ff89159b81ec2c55c9a49550a801265131eae15ffb435854e75aa23bc/inf/dFC8SSa_ObmEcQvuVaqwsJXe03w_7TuNS8S3l_V_4oCaBkNPVl8DRVxF6G8hCNLcN9RtMUSwQrhsuITE724ZUA%3D%3D?uid=1285640022&filename=%D0%9D%D0%9A%D0%A1.jpeg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1285640022&tknv=v3&is_direct_zip_experiment=1&size=1920x922",
+            N_dark: "https://1.downloader.disk.yandex.ru/preview/a10b545cafeb80f7e015eb3158685629768f28aea74c5744a75cab07cbb28058/inf/dLRE5FvvTruaIgqCweddg5Xe03w_7TuNS8S3l_V_4oDxFMZG5WstL_PJnIktXydY5bkgW_ak1D4f5cp5gI7W_Q%3D%3D?uid=1285640022&filename=%D0%9D%D0%9A%D0%A2.jpeg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1285640022&tknv=v3&is_direct_zip_experiment=1&size=1920x922"
+        };
 
-            generateBtn.addEventListener('click', () => {
-                const randomIndex = Math.floor(Math.random() * messages.length);
-                messageDisplay.textContent = messages[randomIndex];
-                count++;
-                counter.textContent = `Напутствий получено: ${count}`;
+        const studyLink = "https://study.hoff.ru/student/dashboard/loadCurs/2211";
+
+        // ---------- СОСТОЯНИЕ ----------
+        let screen = 'start';
+        let currentQuestionIndex = 0;
+        let answers = new Array(questions.length).fill(null);
+        let selectedTone = null;
+        let quizFinished = false;
+        let colorChoiceMade = false;
+        let dominantStyle = null;
+
+        const container = document.getElementById('quizContainer');
+
+        // ---------- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ----------
+        const zoomModal = document.getElementById('zoomModal');
+        const zoomImage = document.getElementById('zoomImage');
+        const closeZoomBtn = document.getElementById('closeZoomBtn');
+
+        function openZoom(src) {
+            zoomImage.src = src;
+            zoomModal.classList.add('active');
+        }
+
+        function closeZoom() {
+            zoomModal.classList.remove('active');
+        }
+
+        closeZoomBtn.addEventListener('click', closeZoom);
+        zoomModal.addEventListener('click', (e) => {
+            if (e.target === zoomModal) closeZoom();
+        });
+
+        // ---------- РЕНДЕР ----------
+        function render() {
+            if (screen === 'start') {
+                renderStartScreen();
+            } else if (screen === 'quiz') {
+                renderQuestion();
+            } else if (screen === 'toneChoice') {
+                renderToneChoice();
+            } else if (screen === 'final') {
+                renderFinalScreen();
+            }
+        }
+
+        function renderStartScreen() {
+            let html = `
+                <div class="start-screen fade-in">
+                    <div class="start-emoji">🛋️ 🖼️ ☕</div>
+                    <h2>Какой интерьерный стиль вам ближе?</h2>
+                    <p>Ответьте на 8 простых вопросов о привычках, хобби и эстетических предпочтениях — и узнайте, какой стиль подходит именно вам.</p>
+                    <button class="btn btn-primary" id="startBtn">Начать тест</button>
+                </div>
+            `;
+            container.innerHTML = html;
+
+            document.getElementById('startBtn').addEventListener('click', () => {
+                screen = 'quiz';
+                currentQuestionIndex = 0;
+                answers = new Array(questions.length).fill(null);
+                quizFinished = false;
+                colorChoiceMade = false;
+                selectedTone = null;
+                dominantStyle = null;
+                render();
             });
-        })();
-    </script>
+        }
+
+        function renderQuestion() {
+            const q = questions[currentQuestionIndex];
+            const selected = answers[currentQuestionIndex];
+            const isLast = currentQuestionIndex === questions.length - 1;
+
+            let html = `
+                <div class="quiz-header">
+                    <div class="progress-indicator">
+                        <span class="progress-text">Вопрос ${currentQuestionIndex + 1} из ${questions.length}</span>
+                    </div>
+                    <div class="decor-emojis">🛋️ 🖼️ ☕</div>
+                </div>
+                <div class="question-text">${q.text}</div>
+                <div class="options-grid">
+            `;
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = selected === opt.style;
+                html += `
+                    <button class="option-btn ${isSelected ? 'selected' : ''}" data-style="${opt.style}" data-idx="${idx}">
+                        ${opt.text}
+                    </button>
+                `;
+            });
+
+            html += `</div>`;
+
+            html += `<div class="nav-buttons">`;
+            if (currentQuestionIndex > 0) {
+                html += `<button class="btn btn-secondary" id="prevBtn">Назад</button>`;
+            } else {
+                html += `<span></span>`;
+            }
+
+            if (isLast) {
+                html += `<button class="btn btn-primary" id="finishBtn" ${!selected ? 'disabled' : ''}>Показать результат</button>`;
+            } else {
+                html += `<button class="btn btn-primary" id="nextBtn" ${!selected ? 'disabled' : ''}>Далее</button>`;
+            }
+            html += `</div>`;
+
+            container.innerHTML = html;
+
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    answers[currentQuestionIndex] = btn.dataset.style;
+                    renderQuestion();
+                });
+            });
+
+            const nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    if (answers[currentQuestionIndex]) {
+                        currentQuestionIndex++;
+                        render();
+                    }
+                });
+            }
+
+            const prevBtn = document.getElementById('prevBtn');
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    currentQuestionIndex--;
+                    render();
+                });
+            }
+
+            const finishBtn = document.getElementById('finishBtn');
+            if (finishBtn) {
+                finishBtn.addEventListener('click', () => {
+                    if (answers[currentQuestionIndex]) {
+                        const counts = getCounts();
+                        if (counts.C >= counts.T && counts.C >= counts.N) {
+                            dominantStyle = 'C';
+                        } else if (counts.T >= counts.C && counts.T >= counts.N) {
+                            dominantStyle = 'T';
+                        } else {
+                            dominantStyle = 'N';
+                        }
+                        screen = 'toneChoice';
+                        quizFinished = true;
+                        colorChoiceMade = false;
+                        selectedTone = null;
+                        render();
+                    }
+                });
+            }
+        }
+
+        function getCounts() {
+            const count = { C: 0, T: 0, N: 0 };
+            answers.forEach(a => { if (a) count[a]++; });
+            return count;
+        }
+
+        function renderToneChoice() {
+            let titleText = '';
+            let badgeText = '';
+            let cards = '';
+
+            if (dominantStyle === 'C') {
+                badgeText = 'СОВРЕМЕННЫЙ СТИЛЬ';
+                titleText = 'Какая цветовая гамма вам ближе?';
+                cards = `
+                    <div class="color-card ${selectedTone === 'C_lightBright' ? 'active' : ''}" data-tone="C_lightBright">
+                        <div class="zoom-icon" data-src="${photos.C_lightBright}">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        </div>
+                        <img class="color-photo" src="${photos.C_lightBright}" alt="Светлая с яркими акцентами">
+                        <span class="color-label">Светлая с яркими акцентами</span>
+                    </div>
+                    <div class="color-card ${selectedTone === 'C_light' ? 'active' : ''}" data-tone="C_light">
+                        <div class="zoom-icon" data-src="${photos.C_light}">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        </div>
+                        <img class="color-photo" src="${photos.C_light}" alt="Светлая">
+                        <span class="color-label">Светлая</span>
+                    </div>
+                    <div class="color-card ${selectedTone === 'C_dark' ? 'active' : ''}" data-tone="C_dark">
+                        <div class="zoom-icon" data-src="${photos.C_dark}">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        </div>
+                        <img class="color-photo lighten" src="${photos.C_dark}" alt="Тёмная">
+                        <span class="color-label">Тёмная</span>
+                    </div>
+                `;
+            } else if (dominantStyle === 'T') {
+                badgeText = 'ТРАДИЦИОННЫЙ СТИЛЬ';
+                titleText = 'Какая цветовая гамма вам ближе?';
+                cards = `
+                    <div class="color-card ${selectedTone === 'T_light' ? 'active' : ''}" data-tone="T_light">
+                        <div class="zoom-icon" data-src="${photos.T_light}">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        </div>
+                        <img class="color-photo" src="${photos.T_light}" alt="Светлая">
+                        <span class="color-label">Светлая</span>
+                    </div>
+                    <div class="color-card ${selectedTone === 'T_dark' ? 'active' : ''}" data-tone="T_dark">
+                        <div class="zoom-icon" data-src="${photos.T_dark}">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        </div>
+                        <img class="color-photo" src="${photos.T_dark}" alt="Тёмная">
+                        <span class="color-label">Тёмная</span>
+                    </div>
+                `;
+            } else if (dominantStyle === 'N') {
+                badgeText = 'НЕОКЛАССИЧЕСКИЙ СТИЛЬ';
+                titleText = 'Какая цветовая гамма вам ближе?';
+                cards = `
+                    <div class="color-card ${selectedTone === 'N_light' ? 'active' : ''}" data-tone="N_light">
+                        <div class="zoom-icon" data-src="${photos.N_light}">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        </div>
+                        <img class="color-photo" src="${photos.N_light}" alt="Светлая">
+                        <span class="color-label">Светлая</span>
+                    </div>
+                    <div class="color-card ${selectedTone === 'N_dark' ? 'active' : ''}" data-tone="N_dark">
+                        <div class="zoom-icon" data-src="${photos.N_dark}">
+                            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16" y1="16" x2="21" y2="21"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        </div>
+                        <img class="color-photo" src="${photos.N_dark}" alt="Тёмная">
+                        <span class="color-label">Тёмная</span>
+                    </div>
+                `;
+            }
+
+            let html = `
+                <div class="result-screen fade-in">
+                    <div class="result-style-badge">${badgeText}</div>
+                    <div class="result-title">${titleText}</div>
+                    <div class="color-choice" id="colorChoice">
+                        ${cards}
+                    </div>
+                    <div class="nav-buttons" style="justify-content: flex-end;">
+                        <button class="btn btn-primary" id="confirmColorBtn" ${!selectedTone ? 'disabled' : ''}>Подтвердить выбор</button>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+
+            document.querySelectorAll('.color-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('.zoom-icon')) return;
+                    
+                    selectedTone = card.dataset.tone;
+                    document.querySelectorAll('.color-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    const btn = document.getElementById('confirmColorBtn');
+                    if (btn) btn.disabled = false;
+                });
+            });
+
+            document.querySelectorAll('.zoom-icon').forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const src = icon.dataset.src;
+                    if (src) openZoom(src);
+                });
+            });
+
+            const confirmBtn = document.getElementById('confirmColorBtn');
+            if (confirmBtn) {
+                confirmBtn.addEventListener('click', () => {
+                    if (selectedTone) {
+                        colorChoiceMade = true;
+                        screen = 'final';
+                        render();
+                    }
+                });
+            }
+        }
+
+        function renderFinalScreen() {
+            let styleData = {};
+            let imageSrc = '';
+            let isLighten = false;
+            
+            if (dominantStyle === 'C') {
+                if (selectedTone === 'C_lightBright') {
+                    styleData = {
+                        badge: "СКАНДИНАВСКИЙ",
+                        title: "Скандинавский стиль",
+                        description: "Вы цените практичность, ритм и свободу. Для вас важно, чтобы интерьер был удобным, функциональным и не перегруженным лишними деталями — ведь каждый элемент должен выполнять свою задачу. Вам близки лаконичные формы, прямые линии, светлые воздушные пространства и жизнерадостные цветовые акценты, которые оживляют обстановку. Ваш идеальный дом — это наполненное светом, стильное пространство для жизни, где лаконичность гармонично сочетается с выразительными деталями."
+                    };
+                    imageSrc = photos.C_lightBright;
+                } else if (selectedTone === 'C_light') {
+                    styleData = {
+                        badge: "СОВРЕМЕННЫЙ СВЕТЛЫЙ",
+                        title: "Современный стиль в светлой гамме",
+                        description: "Вы цените практичность, ритм и свободу. Для вас важно, чтобы интерьер был удобным, функциональным и не перегруженным лишними деталями — ведь каждый элемент должен выполнять свою задачу. Вам близки лаконичные формы, прямые линии, а также легкая, наполненная воздухом светлая гамма, которая визуально расширяет пространство и дарит ощущение чистоты и уюта. Ваш идеальный дом — это наполненное светом пространство для жизни, технологий и воздуха."
+                    };
+                    imageSrc = photos.C_light;
+                } else {
+                    styleData = {
+                        badge: "СОВРЕМЕННЫЙ ТЁМНЫЙ",
+                        title: "Современный стиль в тёмной гамме",
+                        description: "Вы цените практичность, ритм и свободу. Для вас важно, чтобы интерьер был удобным, функциональным и не перегруженным лишними деталями — ведь каждый элемент должен выполнять свою задачу. Вам близки лаконичные формы, прямые линии, а глубокая и выразительная темная гамма помогает создать камерную, стильную и собранную атмосферу. Ваш идеальный дом — это современное, технологичное пространство с характером."
+                    };
+                    imageSrc = photos.C_dark;
+                    isLighten = true;
+                }
+            } else if (dominantStyle === 'T') {
+                if (selectedTone === 'T_light') {
+                    styleData = {
+                        badge: "ТРАДИЦИОННЫЙ СВЕТЛЫЙ",
+                        title: "Традиционный стиль в светлой гамме",
+                        description: "Ваша база — это тепло, уют и связь с природой. Вы выбираете простые формы, натуральные фактуры и детали, которые создают ощущение основательного дома. Вам близка светлая природная гамма (мягкие оттенки топленого молока, выбеленного дерева, льна и глины), рогожка, плетеные корзины и текстиль с душевным характером, наполняющие пространство воздухом и светом. Ваш дом — это светлая, тихая гавань, где легко замедлиться и отдохнуть от городской суеты."
+                    };
+                    imageSrc = photos.T_light;
+                } else {
+                    styleData = {
+                        badge: "ТРАДИЦИОННЫЙ ТЁМНЫЙ",
+                        title: "Традиционный стиль в тёмной гамме",
+                        description: "Ваша база — это тепло, уют и связь с природой. Вы выбираете простые формы, натуральные фактуры и детали, которые создают ощущение основательного дома. Вам близка глубокая природная гамма (насыщенные оттенки темной земли, глубокой хвои и обожженной глины), плотная рогожка, темное дерево, плетеные корзины и уютный текстиль с душевным характером. Ваш дом — это камерная, обволакивающая тихая гавань, где легко замедлиться и отдохнуть от городской суеты."
+                    };
+                    imageSrc = photos.T_dark;
+                }
+            } else if (dominantStyle === 'N') {
+                if (selectedTone === 'N_light') {
+                    styleData = {
+                        badge: "НЕОКЛАССИЧЕСКИЙ СВЕТЛЫЙ",
+                        title: "Неоклассический стиль в светлой гамме",
+                        description: "Вы любите гармонию, элегантность и современный взгляд на классику. Вам близки симметрия, плавные линии, благородные фактуры (велюр, деликатный блеск золота или серебра) и мягкая светлая гамма, которая наполняет пространство воздухом, легким сиянием и чувством простора. Вы цените эстетику, но адаптируете её под комфорт повседневной жизни — без избыточной тяжести дворцовых интерьеров, но с изысканным вкусом. Ваш дом выглядит сбалансированно, свежо, респектабельно и стильно."
+                    };
+                    imageSrc = photos.N_light;
+                } else {
+                    styleData = {
+                        badge: "НЕОКЛАССИЧЕСКИЙ ТЁМНЫЙ",
+                        title: "Неоклассический стиль в тёмной гамме",
+                        description: "Вы любите гармонию, элегантность и современный взгляд на классику. Вам близки симметрия, плавные линии, благородные фактуры (велюр, деликатный блеск золота или серебра) и глубокая, сдержанная темная гамма, придающая интерьеру особый драматизм, камерность и сложный характер. Вы цените эстетику, но адаптируете её под комфорт повседневной жизни — без избыточной тяжести дворцовых интерьеров, но с изысканным вкусом. Ваш дом выглядит сбалансированно, загадочно, респектабельно и стильно."
+                    };
+                    imageSrc = photos.N_dark;
+                }
+            }
+
+            let html = `
+                <div class="result-screen fade-in">
+                    <div class="result-style-badge">ВАШ СТИЛЬ: ${styleData.badge}</div>
+                    <div class="result-title">${styleData.title}</div>
+                    <div class="result-layout">
+                        <div class="result-image-container">
+                            <img src="${imageSrc}" class="${isLighten ? 'lighten' : ''}" alt="${styleData.title}">
+                        </div>
+                        <div class="result-description">${styleData.description}</div>
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" id="restartBtn">Пройти заново</button>
+                            <a class="btn btn-primary" href="${studyLink}" target="_blank" rel="noopener">Узнать больше о стилях Hoff</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+
+            document.getElementById('restartBtn').addEventListener('click', () => {
+                screen = 'start';
+                currentQuestionIndex = 0;
+                answers = new Array(questions.length).fill(null);
+                quizFinished = false;
+                colorChoiceMade = false;
+                selectedTone = null;
+                dominantStyle = null;
+                render();
+            });
+        }
+
+        // Старт
+        render();
+    })();
+</script>
 </body>
 </html>
